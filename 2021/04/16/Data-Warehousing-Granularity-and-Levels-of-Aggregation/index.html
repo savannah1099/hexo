@@ -13,13 +13,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="AggregationThe central concept of data warehousing is Aggregation.Aggregate values have different levels of granularity, for example, Total Sales per Year has lower granularity than Total Sales per Qu">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/.com//04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png">
-<meta property="og:image" content="http://example.com/.com//04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png">
+<meta property="og:image" content="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/2.png?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/3.png">
+<meta property="og:image" content="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/4.png?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/5.png">
+<meta property="og:image" content="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/6.png?raw=true">
 <meta property="article:published_time" content="2021-04-15T23:57:22.000Z">
-<meta property="article:modified_time" content="2021-04-16T01:03:57.471Z">
+<meta property="article:modified_time" content="2021-04-16T01:36:42.521Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/.com//04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png">
   
     <link rel="alternate" href="../../../../atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -100,7 +104,7 @@
       
         <h3 id="Aggregation"><a href="#Aggregation" class="headerlink" title="Aggregation"></a>Aggregation</h3><p>The central concept of data warehousing is <strong>Aggregation</strong>.<br>Aggregate values have different levels of granularity, for example, Total Sales per Year has lower granularity than Total Sales per Quarter. (可以想象，当我们做图形时，年销量要比季销量的点少，1:4，所以说年销量的粒度比较低。). We use the term Levels of Aggregation, based on the foundation of Data Warehouse Granularity.</p>
 <blockquote>
-<p>Computer Lab Usage Case Study<br><img src="/.com//04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png" alt="E/R Diagram"><br><img src="/.com//04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/2.png" alt="Star Schema"></p>
+<p>Computer Lab Usage Case Study<br><img src="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/1.png" alt="E/R Diagram"><br><img src="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/2.png?raw=true" alt="Star Schema"></p>
 </blockquote>
 <ul>
 <li>With this <em>precomputed aggregate value</em>, the retrieval of Num of Logins can be done more efficiently.</li>
@@ -109,8 +113,21 @@
 <hr>
 <h5 id="There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema"><a href="#There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema" class="headerlink" title="There are two ways to lower the level of aggregations of a star schema."></a>There are two ways to lower the level of aggregations of a star schema.</h5><p>Add a new dimension<br>Replace an existing dimension with a higher granularity dimension.<br><strong>本质上就是添加更多细节，降低维度–&gt; which means more details.</strong></p>
 <p>THe only rule is that level(x+1) star chema is more aggregated than levels x star schema. Moreover, ther could be more than one star shema in each level. For example, Level-0 has one star schema, but Level-1 might have 5 star schemas, and Level-2 might have 10 star schemas. (整合程度越高， 可能的组合就越多。)</p>
+<h5 id="Another-way-is-starting-from-Level-0-by-converting-an-E-R-diagram-into-a-star-schema-structure"><a href="#Another-way-is-starting-from-Level-0-by-converting-an-E-R-diagram-into-a-star-schema-structure" class="headerlink" title="Another way is starting from Level-0 by converting an E/R diagram into a star schema structure."></a>Another way is starting from Level-0 by converting an E/R diagram into a star schema structure.</h5><hr>
+<h5 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h5><p>The upper-level star schema is often implemented as a dashboard (有下拉条的控制面板之类的).</p>
+<dl>
+  <dt>Level-0 star schema</dt>
+  <dd>implemented by the <strong>create table statements</strong> in SQL.</dd>
+
+  <dt>The upper-level star schemas</dt>
+  <dd>impleneted as view by <strong>create view statements</strong> in SQL.</dd>
+</dl>
+
 <hr>
-<h5 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h5><p>The upper-level star schema is often implemented as a dashboard.</p>
+<h5 id="Facts-without-Fact-Measures"><a href="#Facts-without-Fact-Measures" class="headerlink" title="Facts without Fact Measures"></a>Facts without Fact Measures</h5><p>Facts without fact measures are only possible if the fact measure is a count, such as Num of Logins in this case, but if it is ‘sum’, then Level-0 star schema mush still include the fact measure.<br><img src="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/3.png" alt="Level-0 Fact Table"><br><img src="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/4.png?raw=true" alt="Facts without Fact Measures"></p>
+<blockquote>
+<p>Purchase Order Case Study<br><img src="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/5.png" alt="Purchase Order E/R Diagram"><br><img src="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/6.png?raw=true" alt="Purchase Order Star Schema-High Level of Aggregation"></p>
+</blockquote>
 
       
     </div>
