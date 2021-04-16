@@ -102,7 +102,7 @@
 <li>When we want to drill down (查看更多细节的数据总结，例如每天销量最高的时段)， return to operational database is not so desirable, on the other hand, the fact table has not stored this kind of infomation. Thus, we need <strong>Granularity</strong> which consists of a number of granularity layers (降级处理层面，类似与分解不同纬度)。 <strong>Level 0</strong> contains the most details data (<em>where no aggregation exists 这里就类似与E/R diagram, 但是两者的结构不同，前者为star schema</em>), higher level lower granularity， then higher the level of aggregation (level的数计是从0往上排序的，我们通常只能区分0或者非0).</li>
 </ul>
 <hr>
-<h5 id="There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema"><a href="#There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema" class="headerlink" title="There are two ways to lower the level of aggregations of a star schema."></a>There are two ways to lower the level of aggregations of a star schema.</h5><p>Add a new dimension<br>Replace an existing dimension with a higher granularity dimension.<br><strong>本质上就是添加更多细节，降低维度–&gt; which means more details.</strong></p>
+<h5 id="There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema-common-method"><a href="#There-are-two-ways-to-lower-the-level-of-aggregations-of-a-star-schema-common-method" class="headerlink" title="There are two ways to lower the level of aggregations of a star schema (common method)."></a>There are two ways to lower the level of aggregations of a star schema (common method).</h5><p>Add a new dimension<br>Replace an existing dimension with a higher granularity dimension.<br><strong>本质上就是添加更多细节，降低维度–&gt; which means more details.</strong></p>
 <p>THe only rule is that level(x+1) star chema is more aggregated than levels x star schema. Moreover, ther could be more than one star shema in each level. For example, Level-0 has one star schema, but Level-1 might have 5 star schemas, and Level-2 might have 10 star schemas. (整合程度越高， 可能的组合就越多。)</p>
 <h5 id="Another-way-is-starting-from-Level-0-by-converting-an-E-R-diagram-into-a-star-schema-structure"><a href="#Another-way-is-starting-from-Level-0-by-converting-an-E-R-diagram-into-a-star-schema-structure" class="headerlink" title="Another way is starting from Level-0 by converting an E/R diagram into a star schema structure."></a>Another way is starting from Level-0 by converting an E/R diagram into a star schema structure.</h5><hr>
 <h5 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h5><p>The upper-level star schema is often implemented as a dashboard (有下拉条的控制面板之类的).</p>
@@ -119,6 +119,11 @@
 <blockquote>
 <p>Purchase Order Case Study<br><img src="https://raw.githubusercontent.com/savannah1099/hexo.github.io/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/5.png" alt="Purchase Order E/R Diagram"><br><img src="https://github.com/savannah1099/hexo.github.io/blob/master/2021/04/16/Data-Warehousing-Granularity-and-Levels-of-Aggregation/6.png?raw=true" alt="Purchase Order Star Schema-High Level of Aggregation"></p>
 </blockquote>
+<p>Product is an abstraction and Item is a physical item (1-m, 一对多的关系，例如护肤品分好多items.)<br>当我们从高level降到低level的时候，可能去合并已经存在的dimensions到一个新的dimension中， 从而控制每条记录的数量达到最低。<br>需要注意的是拥有最低粒度的dimension并不意味着fact easures不能进一步拆解， 我们需要回到E/R diagram中再次进行校对。</p>
+<hr>
+<h5 id="Understanding-the-Relationship-between-Transactions-and-Fact-Measures"><a href="#Understanding-the-Relationship-between-Transactions-and-Fact-Measures" class="headerlink" title="Understanding the Relationship between Transactions and Fact Measures"></a>Understanding the Relationship between Transactions and Fact Measures</h5><p>其实就是看要求的需要记录的record的粒程度，例如， 如果只要求product的交易量， 那么item就无需包含在内，如是需要item，则需要降维到Item的层面。前面的情况如果需要在报告中添加item的信息，则可以用bridge table来获取信息。</p>
+<hr>
+<p>Reference:<br>Carlos, C., &amp; Steven, M. (2016). Database systems : Design, implementation, &amp; management. ProQuest Ebook Central <a target="_blank" rel="noopener" href="https://ebookcentral.proquest.com/">https://ebookcentral.proquest.com</a></p>
 
       
     </div>
